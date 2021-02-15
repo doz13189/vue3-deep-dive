@@ -19,5 +19,8 @@ reactivity.cjs.prod.js
 reactivity.esm-browser.js
 reactivity.esm-browser.prod.js
 reactivity.esm-bundler.js
+
 reactivity.global.js
 reactivity.global.prod.js
+
+vue(.runtime).global(.prod).js
