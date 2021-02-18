@@ -1,7 +1,7 @@
 <script src="https://unpkg.com/vue@next"></script>
 
 <style>
-  .mt-undefined {
+  .mt-4 {
     margin: 10px
   }
 </style>
@@ -10,36 +10,34 @@
 
 <script>
 const { h, createApp } = Vue
-console.log(h)
 
 const Stack = {
   render() {
-    // const slot = this.$slots.default && this.$slots.default()
+    console.log(this.$props)
+
+    // this.$slots.default is function if slot contents is there
+    // if there is nothing provided to be conponent, this will be undefined
+    // slot contents is retrieved through this.$slots.default
     const slot = this.$slots.default
       ? this.$slots.default()
       : []
+    console.log(slot)
 
     return h('div', { class: 'stack'}, slot.map(child => {
-      return h('div', { class: `mt-${this.$props.size}`}, [
+      return h('div', { class: `mt-${child.props?.size}`}, [
         child
       ])
     }))
   }
-  // render() {
-  //   return h('div', 'hello')
-  // }
 }
 
 const App = {
   components: { Stack },
   template: `
-    <Stack size=4>
+    <Stack size="4">
       <div>hello</div>
-      <div>hello</div>
-      <div>hello</div>
-      <Stack size=4>
-        <div>hello</div>
-        <div>hello</div>
+      <Stack size="4">
+        <div>child hello</div>
       </Stack>
     </Stack>
   `
