@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    const { h, createApp, nextTick } = Vue
+
+    const App = {
+      // components: { Stack },
+      data() {
+        return {
+          msg: 'One'
+        }
+      },
+      mounted() {
+        this.msg = 'Two'
+
+        nextTick(() => {
+          this.msg = 'Three'
+        })
+
+        setTimeout(() => {
+          this.msg = 'Three'
+        }, 1000)
+
+      },
+      template: `
+          <div>
+            {{ msg }}
+          </div>
+      `
+    }
+    createApp(App).mount('#app')
+  </script>
+
+  
+</body>
+</html>
