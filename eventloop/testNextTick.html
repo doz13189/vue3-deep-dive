@@ -10,32 +10,43 @@
 <body>
   <div id="app"></div>
   <script>
-    const { h, createApp, nextTick } = Vue
+    const { createApp, nextTick } = Vue
 
     const App = {
-      // components: { Stack },
+      template: `
+          <div ref="sample">
+            {{ msg }}
+          </div>
+      `,
       data() {
         return {
-          msg: 'One'
+          msg: 'initial value'
         }
       },
       mounted() {
-        this.msg = 'Two'
+        this.msg = 'mounted value'
+        Promise.resolve().then(() => {
+          console.log('promise', this.$refs.sample.innerText)
+        })
+        console.log('mounted', this.$refs.sample.innerText)
 
         nextTick(() => {
-          this.msg = 'Three'
+          this.msg = 'nextTick value'
+        }).then(() => {
+          console.log('nextTick', this.$refs.sample.innerText)
         })
 
         setTimeout(() => {
-          this.msg = 'Three'
-        }, 1000)
+          this.msg = 'setTimeout value'
+        }, 0)
+
+        setTimeout(() => {
+          console.log('setTimeout', this.$refs.sample.innerText)
+        }, 0)
 
       },
-      template: `
-          <div>
-            {{ msg }}
-          </div>
-      `
+      setup() {
+      }
     }
     createApp(App).mount('#app')
   </script>
