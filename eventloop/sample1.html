@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    const { createApp, nextTick } = Vue
+
+    const App = {
+      template: `
+          <div ref="sample">
+            {{ msg }}
+          </div>
+      `,
+      data() {
+        return {
+          msg: 'initial value'
+        }
+      },
+      mounted () {
+        const self = this
+
+        this.msg = 'mounted value'
+        Promise.resolve().then(() => {
+          console.log('promise', self.$refs.sample.innerText)
+          // promise mounted value
+        })
+      },
+    }
+    createApp(App).mount('#app')
+  </script>
+</body>
+</html>

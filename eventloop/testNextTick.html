@@ -23,48 +23,24 @@
           msg: 'initial value'
         }
       },
-      mounted() {
+      mounted () {
         const self = this
 
         this.msg = 'mounted value'
-        Promise.resolve().then(() => {
-          console.log('promise', this.$refs.sample.innerText)
-        })
         console.log('mounted', this.$refs.sample.innerText)
 
-        nextTick(() => {
-          this.msg = 'nextTick value'
-        }).then(() => {
-          console.log('nextTick', this.$refs.sample.innerText)
-        })
+        // Promise.resolve().then(() => {
+        //   console.log('promise', this.$refs.sample.innerText)
+        // })
 
-        setTimeout(() => {
-          Promise.resolve().then(() => {
-            self.msg = 'setTimeout value'
-            console.log('setTimeout', self.$refs.sample.innerText)
-          }).then(() => {
-            console.log('setTimeout.then', self.$refs.sample.innerText)
-          })
-        }, 0)
+        // nextTick(() => {
+        //   console.log('nextTick', this.$refs.sample.innerText)
+        // })
 
         // setTimeout(() => {
-        //   console.log('setTimeout', this.$refs.sample.innerText)
+        //   console.log('setTimeout', self.$refs.sample.innerText)
         // }, 0)
 
-
-        window.addEventListener('click', () => {
-          Promise.resolve().then(() => {
-            self.msg = 'addEventListener value'
-            console.log('addEventListener', self.$refs.sample.innerText)
-          }).then(() => {
-            console.log('addEventListener.then', self.$refs.sample.innerText)
-          })
-        }, false)
-
-
-        // window.addEventListener('click', () => {
-        //   console.log('addEventListener', self.$refs.sample.innerText)
-        // }, false)
 
       },
       setup() {
